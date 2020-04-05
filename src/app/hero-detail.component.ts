@@ -21,10 +21,10 @@ export class HeroDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.forEach((params: Params) => {
-      if (params['id'] !== undefined) {
-        const id = +params['id'];
+      if (params['recordId'] !== undefined) {
+        const recordId = +params['recordId'];
         this.navigated = true;
-        this.heroService.getHero(id).subscribe(hero => (this.hero = hero));
+        this.heroService.getHero(recordId.toString()).subscribe(hero => (this.hero = hero));
       } else {
         this.navigated = false;
         this.hero = new Hero();

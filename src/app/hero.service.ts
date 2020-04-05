@@ -17,14 +17,14 @@ export class HeroService {
       .pipe(map(data => data), catchError(this.handleError));
   }
 
-  getHero(id: number): Observable<Hero> {
+  getHero(recordId: string): Observable<Hero> {
     return this.getHeroes().pipe(
-      map(heroes => heroes.find(hero => hero.id === id))
+      map(heroes => heroes.find(hero => hero.recordId === recordId))
     );
   }
 
   save(hero: Hero) {
-    if (hero.id) {
+    if (hero.recordId) {
       return this.put(hero);
     }
     return this.post(hero);
@@ -34,7 +34,7 @@ export class HeroService {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    const url = `${this.heroesUrl}/${hero.id}`;
+    const url = `${this.heroesUrl}/${hero.recordId}`;
 
     return this.http.delete<Hero>(url).pipe(catchError(this.handleError));
   }
@@ -55,7 +55,7 @@ export class HeroService {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    const url = `${this.heroesUrl}/${hero.id}`;
+    const url = `${this.heroesUrl}/${hero.recordId}`;
 
     return this.http.put<Hero>(url, hero).pipe(catchError(this.handleError));
   }
